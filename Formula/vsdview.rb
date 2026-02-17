@@ -1,8 +1,8 @@
 class Vsdview < Formula
   desc "Read-only viewer for Microsoft Visio files (.vsdx/.vsd)"
   homepage "https://github.com/yeager/vsdview"
-  url "https://github.com/yeager/vsdview/archive/refs/tags/v0.1.7.tar.gz"
-  sha256 "c96a0d7b597e9d3a7237941f8c033dd06f68a015df28678f6bb41ce60c553ac6"
+  url "https://github.com/yeager/vsdview/archive/refs/tags/v0.2.0.tar.gz"
+  sha256 "1a336f5ce676ff3da9d8c4a393081226440f9cda28e357d21a5c9081a2fadbc5"
   license "GPL-3.0-or-later"
 
   depends_on "gtk4"
