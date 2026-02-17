@@ -16,16 +16,14 @@ class Vsdview < Formula
     libexec.install Dir["po"] if Dir.exist?("po")
     libexec.install Dir["locale"] if Dir.exist?("locale")
 
-    # Find the versioned python binary
-    python = Formula["python@3.13"].opt_libexec/"bin/python3"
-    unless python.exist?
-      python = Formula["python@3.13"].opt_bin/"python3.13"
-    end
+    python = Formula["python@3.13"].opt_bin/"python3.13"
 
-    (bin/"vsdview").write_env_script(
-      python, "-m", "vsdview",
-      PYTHONPATH: libexec
-    )
+    (bin/"vsdview").write <<~EOS
+      #!/bin/bash
+      export PYTHONPATH="#{libexec}"
+      exec "#{python}" -m vsdview "$@"
+    EOS
+    (bin/"vsdview").chmod 0755
   end
 
   test do
