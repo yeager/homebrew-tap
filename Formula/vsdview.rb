@@ -17,11 +17,11 @@ class Vsdview < Formula
     libexec.install Dir["po"] if Dir.exist?("po")
     libexec.install Dir["locale"] if Dir.exist?("locale")
 
-    # Create wrapper script
+    # Create wrapper script that finds the Homebrew python
     (bin/"vsdview").write <<~EOS
       #!/bin/bash
       export PYTHONPATH="#{libexec}:$PYTHONPATH"
-      exec "#{Formula["python@3.13"].opt_bin}/python3" -m vsdview "$@"
+      exec "#{HOMEBREW_PREFIX}/bin/python3" -m vsdview "$@"
     EOS
   end
 
