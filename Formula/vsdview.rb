@@ -12,20 +12,24 @@ class Vsdview < Formula
   depends_on "python@3.13"
 
   def install
-    # Install Python package
     libexec.install Dir["vsdview"]
     libexec.install Dir["po"] if Dir.exist?("po")
     libexec.install Dir["locale"] if Dir.exist?("locale")
 
-    # Create wrapper script
-    (bin/"vsdview").write <<~EOS
-      #!/bin/bash
-      export PYTHONPATH="#{libexec}:$PYTHONPATH"
-      exec "#{Formula["python@3.13"].opt_bin}/python3.13" -m vsdview "$@"
-    EOS
+    # Find the versioned python binary
+    python = Formula["python@3.13"].opt_libexec/"bin/python3"
+    unless python.exist?
+      python = Formula["python@3.13"].opt_bin/"python3.13"
+    end
+
+    (bin/"vsdview").write_env_script(
+      python, "-m", "vsdview",
+      PYTHONPATH: libexec
+    )
   end
 
   test do
-    system bin/"vsdview", "--help"
+    system Formula["python@3.13"].opt_bin/"python3.13", "-c",
+      "import sys; sys.path.insert(0, '#{libexec}'); from vsdview import __version__; print(__version__)"
   end
 end
