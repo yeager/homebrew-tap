@@ -1,14 +1,15 @@
 class Vsdview < Formula
   desc "Read-only viewer for Microsoft Visio files (.vsdx/.vsd)"
   homepage "https://github.com/yeager/vsdview"
-  url "https://api.github.com/repos/yeager/vsdview/tarball/v0.5.0"
-  sha256 "b06ac648be82b71e6bc0ad117b2d93562c1001cbc1911cc3c671e7fcc6cbba25"
+  url "https://github.com/yeager/vsdview/archive/refs/tags/v0.5.0.tar.gz"
+  sha256 "1310d4bbd63ae04807ebb278b23c19bb33394bef3901f62119a92e4f175bfb1e"
   license "GPL-3.0-or-later"
 
   depends_on "gtk4"
   depends_on "libadwaita"
   depends_on "pygobject3"
   depends_on "librsvg"
+  depends_on "libvisio-ng"
   depends_on "python@3.13"
 
   def install
